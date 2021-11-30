@@ -1,4 +1,4 @@
-package modelo;
+package controlador;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import modelo.Cliente;
+import modelo.Conexion;
 
 /**
  *
@@ -21,7 +23,7 @@ public class ClienteDao {
     ResultSet rs;
 
     //Registrar cliente
-    public boolean RegistrarCliente(Cliente cl) {
+    public boolean registrarCliente(Cliente cl) {
         String sql = "INSERT INTO clientes (rut, nombre, telefono, direccion, razon) VALUES (?,?,?,?,?)";
 
         try {
@@ -49,7 +51,7 @@ public class ClienteDao {
     }
 
     //Listar cliente
-    public List ListarCliente() {
+    public List listarCliente() {
         List<Cliente> ListaCl = new ArrayList();
         String sql = "SELECT * FROM clientes";
 
@@ -73,11 +75,11 @@ public class ClienteDao {
         }
         return ListaCl;
     }
-    
+
     //Eliminar clientes mediante id
-    public boolean EliminarCliente(int id) {
+    public boolean eliminarCliente(int id) {
         String sql = "DELETE FROM clientes WHERE id = ?";
-        
+
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -85,9 +87,9 @@ public class ClienteDao {
             return true;
         } catch (SQLException e) {
             System.out.println(e.toString());
-            return false;           
+            return false;
         } finally {
-            
+
             try {
                 con.close();
             } catch (SQLException ex) {
@@ -95,11 +97,11 @@ public class ClienteDao {
             }
         }
     }
-    
+
     //Modificar cliente
-    public boolean ModificarCliente(Cliente cl) {
+    public boolean modificarCliente(Cliente cl) {
         String sql = "UPDATE clientes SET rut=?, nombre=?, telefono=?, direccion=?, razon=? WHERE id=?";
-        
+
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, cl.getRut());
@@ -110,7 +112,7 @@ public class ClienteDao {
             ps.setInt(6, cl.getId());
             ps.execute();
             return true;
-            
+
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
@@ -122,27 +124,25 @@ public class ClienteDao {
             }
         }
     }
-//
-//    //Buscar cliente por rut 
-//    public Cliente Buscarcliente(int rut) {
-//        Cliente cl = new Cliente();
-//        String sql = "SELECT * FROM clientes WHERE rut = ?";
-//
-//        try {
-//            con = cn.getConnection();
-//            ps = con.prepareStatement(sql);
-//            ps.setInt(1, rut);
-//            rs = ps.executeQuery();
-//            if (rs.next()) {
-//                cl.setId(rs.getInt("id"));
-//                cl.setNombre(rs.getString("nombre"));
-//                cl.setTelefono(rs.getString("telefono"));
-//                cl.setDireccion(rs.getString("direccion"));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.toString());
-//        }
-//        return cl;
-//    }
+
+    public Cliente buscarcliente(int rut) {
+        Cliente cl = new Cliente();
+        String sql = "SELECT * FROM clientes WHERE rut = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, rut);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cl.setId(rs.getInt("id"));
+                cl.setNombre(rs.getString("nombre"));
+                cl.setTelefono(rs.getInt("telefono"));
+                cl.setDireccion(rs.getString("direccion"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return cl;
+    }
 
 }

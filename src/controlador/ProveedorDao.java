@@ -1,4 +1,4 @@
-package modelo;
+package controlador;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Conexion;
+import modelo.Proveedor;
 
 /**
  *
@@ -20,7 +22,7 @@ public class ProveedorDao {
     ResultSet rs;
 
     //Reutilizar codigo para registrar a los clientes pr (Proveedores)
-    public boolean RegistrarProveedor(Proveedor pr) {
+    public boolean registrarProveedor(Proveedor pr) {
         String sql = "INSERT INTO proveedor(rut, nombre, telefono, direccion, razon) VALUES (?,?,?,?,?)";
         try {
             con = cn.getConnection();
@@ -46,7 +48,7 @@ public class ProveedorDao {
     }
 
     //Listar a los proveedores
-    public List ListarProveedor() {
+    public List listarProveedor() {
         List<Proveedor> Listapr = new ArrayList();
         String sql = "SELECT * FROM proveedor";
         try {
@@ -71,7 +73,7 @@ public class ProveedorDao {
     }
 
     //Eliminar proveedor mediante id
-    public boolean EliminarProveedor(int id) {
+    public boolean eliminarProveedor(int id) {
         String sql = "DELETE FROM proveedor WHERE id = ? ";
         try {
             con = cn.getConnection();
@@ -94,7 +96,7 @@ public class ProveedorDao {
     }
 
     //Actualizar proveedor
-    public boolean ModificarProveedor(Proveedor pr) {
+    public boolean modificarProveedor(Proveedor pr) {
         String sql = "UPDATE proveedor SET rut=?, nombre=?, telefono=?, direccion=?, razon=? WHERE id=?";
         try {
             con = cn.getConnection();
