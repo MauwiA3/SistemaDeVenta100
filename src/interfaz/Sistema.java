@@ -902,8 +902,7 @@ public class Sistema extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_eliminarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_nuevoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(btn_nuevoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -977,6 +976,11 @@ public class Sistema extends javax.swing.JFrame {
         });
 
         btn_nuevoPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        btn_nuevoPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nuevoProActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -1725,6 +1729,10 @@ public class Sistema extends javax.swing.JFrame {
         jTabbedPane2.setSelectedIndex(5);
         LimpiarTable();
     }//GEN-LAST:event_btn_regUsuariosActionPerformed
+
+    private void btn_nuevoProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoProActionPerformed
+        LimpiarProductos();
+    }//GEN-LAST:event_btn_nuevoProActionPerformed
 
     /**
      * @param args the command line arguments
